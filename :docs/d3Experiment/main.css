@@ -1,0 +1,77 @@
+body{
+  font-family: 'Nunito', sans-serif;
+}
+
+#visualization_area{
+  border: #CCCCCC 2px solid;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.slider{
+  width: 500px;
+}
+
+.flex-container-slider {
+	display: flex;
+	flex-direction: row;
+}
+
+
+.slider-value {
+	padding-bottom: 20px;
+}
+
+.slider-range {
+	padding: 0px 5px;
+}
+
+#settings-bar {
+	padding: 20px;
+	text-align: center;
+}
+
+#title {
+	text-align: center;
+	font-size: 30px;
+  padding-top: 20px;
+}
+/*
+svg{
+  z-index: 1;
+  display:block;
+  position: absolute;
+  top:30;
+} */
+
+#intro-message{
+  display:block;
+  width:650px;
+  height:650px;
+  background-color: #FFFFFFDD;
+  z-index: 2;
+  position: absolute;
+  top:30;
+  text-align:center;
+}
+
+#intro-message:hover{
+  cursor:pointer;
+}
+
+h3,p{
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+circle{
+  z-index: 0;
+}
+g, .user_points, .user_points_radii{
+  z-index: 1;
+}

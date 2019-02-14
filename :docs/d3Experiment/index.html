@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-drag.v1.min.js"></script>
+    <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <script src="https://d3js.org/d3-polygon.v1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link rel="stylesheet" href="main.css">
+
+    <title>D3 Test</title>
+
+  </head>
+  <body>
+    <div class="flex-container">
+      <div id="visualization_area">
+        <div id="title">Time Plot</div>
+        <div style="display:flex;align-items:center;flex-direction:column;">
+          <div>Time (in days)</div>
+          <div class="flex-container-slider">
+            <div class="slider-range">0</div>
+            <div class="slidecontainer">
+              <input type="range" class="slider" id="main_slider" min="0" max="650" style="width:600px;"/>
+            </div>
+            <div class="slider-range">650</div>
+          </div>
+          <div class="slider-value" id="inspection-slider-value"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // Set up size
+        var mapWidth = 650;
+        var mapHeight = 600;
+        var pxToMileRatio = 10;
+
+        // Set up projection that the map is using
+        var projection = d3.geoMercator()
+          .center([-122.433701, 37.767683]) // San Francisco, roughly
+          .scale(225000)
+          .translate([mapWidth / 2, mapHeight / 2]);
+
+        var pxToMiles = (pixels) => {
+          return (pxToMileRatio/mapHeight)*pixels;
+        }
+
+        // Add an SVG element to the DOM
+        var svg = d3.select('#visualization_area').insert('svg',":nth-child(2)")
+          .attr('width', mapWidth)
+          .attr('height', mapHeight);
+
+        var coordinate_data = [];
+
+        d3.csv("data/restaurant_scores.csv").then(function(data) {
+            // console.log(data);
+            coordinate_data = d3.range(data.length).map(function(i){
+                let coords = projection([parseFloat(data[i].business_longitude), parseFloat(data[i].business_latitude)]);
+                return{
+                    x: coords[0],
+                    y: coords[1],
+                    inspection_score: parseFloat(data[i].inspection_score),
+                }
+            })
+            var restaurant_circles = svg.selectAll(".restaurants")
+                .data(coordinate_data)
+                .enter()
+                .append("circle")
+
+            var restaurant_circle_attrs = restaurant_circles
+                .attr("cx", function (d) { return d.x; })
+                .attr("cy", function (d) { return d.y; })
+                .attr("r", 4)
+                .style("fill", "#333333")
+                .style("opacity", 0.01)
+                .classed("restaurants", true);
+        });
+
+        function updateFilter(){
+
+            svg.selectAll(".restaurants")
+             .filter(function(d) {
+               var lower = curr_inspection_score - 15;
+
+               return (d.x > curr_inspection_score || d.x < lower);
+
+             })
+               .style("opacity", .01)
+
+             svg.selectAll(".restaurants")
+              .filter(function(d) {
+                var lower = curr_inspection_score - 15;
+                return (d.x > lower && d.x < curr_inspection_score);
+              })
+                .style("opacity", 1)
+        }
+
+        function dragstarted(d) {
+            d3.select(this).raise().classed("active", true);
+            var point = d3.mouse(this) , p = {x: point[0], y: point[1] };
+        }
+
+        function dragged(d) {
+            d3.select(this).select(".user_points")
+                .attr("cx", d.x = d3.event.x)
+                .attr("cy", d.y = d3.event.y);
+            d3.select(this).select(".user_points_radii")
+                .attr("cx", d.x = d3.event.x)
+                .attr("cy", d.y = d3.event.y);
+
+            updateFilter();
+        }
+
+        function dragended(d) {
+            d3.select(this).classed("active", false);
+        }
+
+        var pxToMiles = (pixels) => {
+          return ((pxToMileRatio/mapHeight)*pixels).toFixed(1);
+        }
+
+        var main_slider = document.getElementById("main_slider");
+
+        var curr_inspection_score = 50;
+        main_slider.oninput = function() {
+            curr_inspection_score = this.value;
+            main_slider = this.value;
+            document.getElementById("inspection-slider-value").innerHTML = this.value;
+            updateFilter();
+        }
+
+    </script>
+
+  </body>
+</html>
