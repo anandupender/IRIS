@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="d3.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-drag.v1.min.js"></script>
+    <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <script src="https://d3js.org/d3-polygon.v1.min.js"></script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      function openFile(){
+        var paperDoc = document.getElementById("paper");
+        paperDoc.style.display = "block";
+      }
+    </script>
+
+    <div id="main-container">
+      <button type="button" class="btn btn-primary" onclick="openFile();">Upload a research paper</button>
+
+      <section class="section" id="paper">
+        <h1>Examining the Influence of Solar Panel Installers on Design Innovation and Market Penetration</h1>
+        <br/><br/>
+        <h2>Abstract</h2>
+        <p>This work uses an agent-based model to examine how installers of photovoltaic (PV) panels influence panel design and the success of residential solar energy. It provides a novel approach to modeling intermediary stakeholder influence on product design, focusing on installer decisions instead of the typical foci of the final customer (homeowners) and the designer/manufacturer. Installers restrict homeowner choice to a subset of all panel options available, and, consequentially, determine medium-term market dynamics in terms of quantity and design specifications of panel installations. This model investigates installer profit-maximization strategies of exploring new panel designs offered by manufacturers (a risk-seeking strategy) vs. exploiting market-tested technology (a risk-averse strategy). Manufacturer design decisions and homeowner purchase decisions are modeled. Realistic details provided from installer and homeowner interviews are included. For example, installers must estimate panel reliability instead of trusting manufacturer statistics, and homeowners make purchase decisions based in part on installer reputation.  We find that installers pursue new and more-efficient panels over sticking-with market-tested technology under a variety of panel-reliability scenarios and two different state scenarios (California and Massachusetts). Results indicate that it does not matter if installers are predisposed to an exploration or exploitation strategy—both types choose to explore new panels that have higher efficiency.</p>
+
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Browse Nomenclature
+        </button>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body" style="display:inline-block !important;">
+            <img src="nomenclature.png" class="img-fluid" alt="Responsive image" style="width:45%;"/>
+            <img src="nomenclature2.png" class="img-fluid" alt="Responsive image" style="width:45%;"/>
+          </div>
+        </div>
+        <br/><br/>
+
+        <h2>Charts</h2>
+        <div class="flex-container">
+
+          <div id="visualization_area">
+            <div id="title">Time Plot</div>
+            <div style="display:flex;align-items:center;flex-direction:column;">
+              <div>Time (in days)</div>
+              <div class="flex-container-slider">
+                <div class="slider-range">0</div>
+                <div class="slidecontainer">
+                  <input type="range" class="slider" id="main_slider" min="0" max="650" style="width:600px;"/>
+                </div>
+                <div class="slider-range">650</div>
+              </div>
+              <div class="slider-value" id="inspection-slider-value"></div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Conclusions</h2>
+        <p>The matrix in Figure 9 summarizes, in qualitative form, the sensitivity analysis results of the model. In the matrix, all factors that influence the current penetration level ("immediate characteristics") or expected future sales belong to a few categories: physical characteristics (including design characteristics), market characteristics, and preferences characteristics. All factors were evaluated in terms of changes of total penetration levels with respect to the baseline scenario for California. Sensitivity in the table below provided the data for the summary Figure 9.
+        We also find that roof size introduces restrictions on the possible system size and, as such, the potential market size. Interviews with installers support this finding. Installers stated that the physical properties of roofs contribute directly to the estimated installation price. Future improvements in panel efficiency will partially mitigate the roof-size effect. Also, exogenous changes in the level of solar irradiation, as exhibited in the CA vs. MA scenarios, alter the realized market price per watt. In both scenarios, the tendency to follow exploration strategy dominates.
+        <br/><br/>As for market characteristics, the potential market size determines the financial viability of any strategy and thus is important to the decision-making agents. However, costs (hard and soft) are more important factors since they directly decide the expenses and determine the profitability of the systems and at what price point. Costs, representing the economics of currently-available panels, are particularly important in the analyzed scenarios. This conclusion is supported, for example, by the NREL report by Fu et al. [45], who analyzed installation dynamics and PV systems. The efficiency levels of PV panels directly influence the attainable hard costs levels. This finding explains why installers track efficiency levels so closely.
+        Other factors might influence the choices that installers make on the PV market. For example, shocks to government policy might shift demand curves and result in temporary out-of-stock events. Testing those scenarios is possible with the current model but is outside the scope of the work.
+        <br/><br/>A possible limitation of the qualitative conclusions is that we fixed the electricity price instead of it fluctuating over time. If the price of electricity increased, the adoption rate may have increased. However, allowing too many parameters to vary makes it more difficult to understand the reasons for the output; thus, this potential variable was held fixed.
+        Also important are the model's assumptions about the preferences of installers (exploration vs. exploitation) and homeowners (rates of return on investment). Future work will explore more sophisticated models, including expanding homeowners’ decision choices to include design parameters of the PV system. We will use survey data, specifically choice-based-conjoint models built from surveys, to articulate homeowner preferences. We also plan to include in future models representations of government and utility decisions. Additionally, this paper does not explore different purchase models, such as leasing. Researchers could adapt the current model to address this. We do not discuss home renters in this study, as a typical home rental lease agreement forbids the modification of or addition to the house structure, nor do renters carry the proper insurance to permit installation. Renters could be modeled as an influencer on a homeowner's decision.
+        <br/><br/>As the model cycles to maturity, the dynamics of the balance between exploration and exploitation change, and the reliability is weighted more heavily by homeowners. Another factor that continues to shape these dynamics is low-price, low-quality competition from manufacturers that specialize in such systems. The reason why efficiency is the dominant factor in decision-making is because of our model assumptions and because of the existing cost and information structure of the market. The research into residential solar PV owners by Rai et al. [49] supports some of these conclusions. Rai et al. found that financial considerations are important for solar adopters. But other results, such as how specific installers make their decisions and what their overall role is, are open questions for further investigation by researchers.
+        <br/><br/>Our assumptions and generalizations do impose limitations on the implications of the work. These limitations include not explicitly modeling manufacturers' research priorities. Explicit modeling of these might change the unanimous dominance of efficiency as the major deciding factor for installers. The restrictions on choice also limit our conclusions. For example, installers can only consider one manufacturer each cycle, and homeowners can only consider one installer, who offers only one panel type, each cycle. These choice restrictions provide clarity on the agent-based model conclusions, without too many "moving parts," but it is difficult to perform basic validation of the results and explore high-level trends, as presented here.
+        <br/><br/>Another potential issue lies with imposing specific functional forms on the reliability and complexity distributions. While our assumptions are conservative, it could be argued that we should investigate other possible approaches. We have not been able to find comparable research papers to provide the comparative analysis. There are also limitations on the installer when choosing potential PV panels for new proposals or considering only the profit as the goal. But it is unclear if more explicit modeling of this procedure would alter the results, while the level of model complexity would significantly increase. Our model does not include government and utility permitting processes, but they will be added in future work. Properly addressing some problems, such as changes in the PV industry standards at the state and county level, requires changing the focus of the model and is therefore outside of the scope of the work.
+        <br/><br/>To summarize, the analysis investigated the dynamics of PV system penetration in the U.S. residential solar energy market using an agent-based model. In particular, we focused on an intermediary agent, installers; this was articulated in the model as guiding design developments of PV panels. The more traditional approach is to directly model homeowners as guiding these developments through their preferences/choices. The model articulated the installers' decision process as one of exploration vs. exploitation, while maximizing profits. Whether the exploration or the exploitation technology adoption strategy dominates depends on the specifics of the market, such as effect of reputation, which was possibly under-represented in the model.
+        As represented, the installers explore new panel offers more than they exploit existing panels, and this drives technological development (panel efficiency). This result has potential implications for policy-makers at the state and national level; if policies can alleviate risks from new panel technologies, perhaps by financially compensating homeowners for system downtime, efficiency should be highly-sought over reliability, which would be a boon to the progress of the solar industry.</p>
+
+
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+          References
+        </button>
+        <div class="collapse" id="collapseExample2">
+          <div class="card card-body" style="display:inline-block !important;">
+            <p>Millstein, D., Cates, S., Disanti, N., Widiss, R., Barbose, G., and Darghouth, N., 2016, Tracking the Sun IX The Installed Price of Residential and Non-Residential Photovoltaic Systems in the United States, Berkeley.
+            <br/>[2]	“SunShot Initiative” [Online]. Available: https://energy.gov/eere/sunshot/sunshot-initiative. [Accessed: 10-Feb-2017].
+            <br/>[3]	“SolarCity Laying off Workers, Restructuring” [Online]. Available: http://www.mercurynews.com/2016/08/17/solarcity-laying-off-workers-restructuring/. [Accessed: 10-Feb-2017].
+            <br/>[4]	Karakaya, E., and Sriwannawit, P., 2015, “Barriers to the Adoption of Photovoltaic Systems: The State of the Art,” Renew. Sustain. Energy Rev., 49, pp. 60–66.
+            <br/>[5]	Islam, T., and Meade, N., 2013, “The Impact of Attribute Preferences on Adoption Timing: The Case of Photo-Voltaic (PV) Solar Cells for Household Electricity Generation,” Energy Policy, 55, pp. 521–530.
+            <br/>[6]	Woodhouse, M., Jones-Albertus, R., Feldman, D., Fu, R., Horowitz, K., Chung, D., Jordan, D., and Kurtz, S., 2016, On the Path to SunShot: The Role of Advancements in Solar Photovoltaic Efficiency, Reliability, and Costs, National Renewable Energy Laboratory, Golden, CO.
+            <br/>[7]	Chung, D., Horowitz, K., and Kurup, P., 2016, On the Path to SunShot: Emerging Opportunities and Challenges in U.S. Solar Manufacturing, National Renewable Energy Laboratory, Golden, CO.
+            <br/>[8]	Chen, H. Q., Honda, T., and Yang, M. C., 2013, “Approaches for Identifying Consumer Preferences for the Design of Technology Products: A Case Study of Residential Solar Panels,” J. Mech. Des., 135(6), p. 61007.
+            <br/>[9]	Gomez, K., Sinitskaya, E., Bao, Q., MacDonald, E., and Yang, M., 2017, “Designing Linked Journey Maps to Understand the Complexities of the Residential Solar Energy Market,” Available: https://erinmacd.stanford.edu/Publications.html.
+            <br/>[10]	Wu, J., Botterud, A., Mills, A., Zhou, Z., Hodge, B. M., and Heaney, M., 2015, “Integrating Solar PV (Photovoltaics) in Utility System Operations: Analytical Framework and Arizona Case Study,” Energy, 85, pp. 1–9.
+            <br/>[11]	Wilkerson, J. T., Cullenward, D., Davidian, D., and Weyant, J. P., 2013, “End Use Technology Choice in the National Energy Modeling System (NEMS): An Analysis of the Residential and Commercial Building Sectors,” Energy Econ., 40, pp. 773–784.
+            <br/>[12]	Janko, S. A., Gorman, B. T., Singh, U. P., and Johnson, N. G., 2015, “High Penetration Residential Solar Photovoltaics and the Effects of Dust Storms on System Net Load,” Proc. ASME 2015 Int. Des. Eng. Tech. Conf. Comput. Inf. Eng. Conf., (57076), p. V02AT03A033.
+            <br/>[13]	Frischknecht, B. D., and Whitefoot, K. S., 2014, “Market Simulation Based Sensitivity Analysis as a Means to Inform Design Effort as Applied to Photovoltaic Panels,” J. Mech. Des., 136, p. 54501.
+            <br/>[14]	Islam, T., 2014, “Household Level Innovation Diffusion Model of Photo-Voltaic (PV) Solar Cells from Stated Preference Data,” Energy Policy, 65, pp. 340–350.
+            <br/>[15]	Rai, V., and Henry, A. D., 2016, “Agent-Based Modelling of Consumer Energy Choices,” Nat. Clim. Chang., (6), pp. 556–562.
+            <br/>[16]	Zhang, H., and Vorobeychik, Y., 2017, “Empirically Grounded Agent-Based Models of Innovation Diffusion: A Critical Review,” Artif. Intell. Rev.
+            <br/>[17]	Nasrinpour, H. R., Friesen, M. R., and others, 2016, “An Agent-Based Model of Message Propagation in the Facebook Electronic Social Network,” arXiv Prepr. arXiv1611.07454.
+            <br/>[18]	Tesfatsion, L., 2006, “Handbook of Computational Economics,” pp. 831–880.
+            <br/>[19]	Henry, A. D., and Vollan, B., 2014, “Networks and the Challenge of Sustainable Development,” Annu. Rev. Environ. Resour., 39, pp. 583–610.
+            <br/>[20]	Zhao, J., Mazhari, E., Celik, N., and Son, Y.-J., 2011, “Hybrid Agent-Based Simulation for Policy Evaluation of Solar Power Generation Systems,” Simul. Model. Pr. Th., 19, pp. 2189–2205.
+            <br/>[21]	Robinson, S. A., and Rai, V., 2015, “Determinants of Spatio-Temporal Patterns of Energy Technology Adoption: An Agent-Based Modeling Approach,” Appl. Energ., 151, pp. 273–284.
+            <br/>[22]	Zhang, H., Vorobeychik, Y., Letchford, J., and Lakkaraju, K., 2015, “Data-Driven Agent-Based Modeling, with Application to Rooftop Solar Adoption,” Proc. 2015 Int. Conf. Auton. Agents Multiagent Syst., pp. 513–521.
+            <br/>[23]	Palmer, J., Sorda, G., and Madlener, R., 2015, “Modeling the Diffusion of Residential Photovoltaic Systems in Italy: An Agent-Based Simulation,” Technol. Forecast. Soc. Change, 99, pp. 106–131.
+            <br/>[24]	Mashhadi, A. R., Esmaeilian, B., and Behdad, S., 2016, “Simulation Modeling of Consumers’ Participation in Product Take-Back Systems,” J. Mech. Des., 138(5), pp. 51403–51411.
+            <br/>[25]	Fudenberg, D., and Tirole, J., 1991, Game Theory, The MIT press.
+            <br/>[26]	International Energy Agency, 2014, Review of Failures of Photovoltaic Modules Final.
+            <br/>[27]	Feldman, D., and Bolinger, M., 2016, On the Path to SunShot: Emerging Opportunities and Challenges in Financing Solar.
+            <br/>[28]	“U.S. Solar Resource Maps” [Online]. Available: http://www.nrel.gov/gis/solar.html. [Accessed: 10-Feb-2017].
+            <br/>[29]	Wilson, C., and Dowlatabadi, H., 2007, “Models of Decision Making and Residential Energy Use,” Annu. Rev. Environ. Resour., 32, pp. 169–203.
+            <br/>[30]	Sinitskaya, E., and Tesfatsion, L., 2015, “Macroeconomies as Constructively Rational Games,” J. Econ. Dyn. Control, 61, pp. 152–182.
+            <br/>[31]	Foster, A. D., and Rosenzweig, M. R., 2010, “Microeconomics of Technology Adoption,” Annu. Rev. Econom., 2, pp. 395–424.
+            <br/>[32]	Jara-Ettinger, J., Gweon, H., Schulz, L. E., and Tenenbaum, J. B., 2016, “The Naïve Utility Calculus: Computational Principles Underlying Commonsense Psychology,” Trends Cogn. Sci., 20(8), pp. 589–604.
+            <br/>[33]	Gill, J., 2014, Bayesian Methods: A Social and Behavioral Sciences Approach, CRC press.
+            <br/>[34]	Bubeck, S., and Cesa-Bianchi, N., 2012, “Regret Analysis of Stochastic and Nonstochastic Multi-Armed Bandit Problems,” arXiv Prepr. arXiv1204.5721.
+            <br/>[35]	Szepesvári, C., 2010, “Algorithms for Reinforcement Learning,” Synth. Lect. Artif. Intell. Mach. Learn., 4(1), pp. 1–103.
+            <br/>[36]	Meyer J W, R., 2016, “(When) Are We Dynamically Optimal? A Psychological Field Guide for Marketing Modelers,” J. Mark., 80(5), pp. 20–33.
+            <br/>[37]	Mas-Colell, A., Whinston, M. D., Green, J. R., and others, 1995, Microeconomic Theory, Oxford University Press, New York.
+            <br/>[38]	Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A., and Rubin, D. B., 2014, Bayesian Data Analysis, CRC press Boca Raton, FL.
+            <br/>[39]	Sigrin, B., Gleason, M., Preus, R., Baring-Gould, I., and Margolis, R., 2016, Distributed Generation Market Demand Model (dGen): Documentation.
+            <br/>[40]	Russell, S., Norvig, P., and Intelligence, A., 1995, “A Modern Approach,” Artif. Intell. Prentice-Hall, Egnlewood Cliffs, 25, p. 27.
+            <br/>[41]	International Energy Agency, 2014, IEA-PVPS T13-01 2014 Review of Failures of Photovoltaic Modules Final.
+            <br/>[42]	Paulson, E. J., and Starkey, R. P., 2013, “Development of a Multistage Reliability-Based Design Optimization Method,” J. Mech. Des., 136(1), p. 11007.
+            <br/>[43]	Smith, W. F., Millisavijevic, J., Sabeghi, M., Allen, J. K., and Mistree, F., 2015, “The Realization of Engineered Systems With Considerations of Complexity,” Proc. ASME 2015 Int. Des. Eng. Tech. Conf. Comput. Inf. Eng. Conf., (57175), pp. 1–11.
+            <br/>[44]	Zhang, H., Vorobeychik, Y., Letchford, J., and Lakkaraju, K., 2016, “Data-Driven Agent-Based Modeling, with Application to Rooftop Solar Adoption,” Auton. Agent. Multi. Agent. Syst., 30(6), pp. 1023–1049.
+            <br/>[45]	Fu, R., Feldman, D., Margolis, R., Woodhouse, M., and Ardani, K., 2017, U.S. Solar Photovoltaic System Cost Benchmark: Q1 2017, National Renewable Energy Laboratory.
+            <br/>[46]	U.S. Energy Informattion Administration, 2009, “Residential Energy Consumption Survey” [Online]. Available: http://www.eia.gov/consumption/residential/. [Accessed: 10-Feb-2017].
+            <br/>[47]	California Energy Commission & California Public Utilities Commission, 2010, “California Solar Statistics,” State Calif. [Online]. Available: https://www.californiasolarstatistics.ca.gov/#. [Accessed: 24-May-2017].
+            <br/>[48]	Feldman, D., Boff, D., and Margolis, R., 2016, Q2/Q3 2016 Solar Industry Update, SunShot U.S. Department of Energy.
+            <br/>[49]	Rai, V., Reeves, D. C., and Margolis, R., 2016, “Overcoming Barriers and Uncertainties in the Adoption of Residential Solar PV,” Renew. Energy, 89, pp. 498–505.</p>
+          </div>
+        </div>
+
+
+      </section>
+    </div>
+
+    <!-- D3 -->
+    <script>
+        // Set up size
+        var mapWidth = 650;
+        var mapHeight = 600;
+        var pxToMileRatio = 10;
+
+        // Set up projection that the map is using
+        var projection = d3.geoMercator()
+          .center([-122.433701, 37.767683]) // San Francisco, roughly
+          .scale(225000)
+          .translate([mapWidth / 2, mapHeight / 2]);
+
+        var pxToMiles = (pixels) => {
+          return (pxToMileRatio/mapHeight)*pixels;
+        }
+
+        // Add an SVG element to the DOM
+        var svg = d3.select('#visualization_area').insert('svg',":nth-child(2)")
+          .attr('width', mapWidth)
+          .attr('height', mapHeight);
+
+        var coordinate_data = [];
+
+        d3.csv("data/restaurant_scores.csv").then(function(data) {
+            // console.log(data);
+            coordinate_data = d3.range(data.length).map(function(i){
+                let coords = projection([parseFloat(data[i].business_longitude), parseFloat(data[i].business_latitude)]);
+                return{
+                    x: coords[0],
+                    y: coords[1],
+                    inspection_score: parseFloat(data[i].inspection_score),
+                }
+            })
+            var restaurant_circles = svg.selectAll(".restaurants")
+                .data(coordinate_data)
+                .enter()
+                .append("circle")
+
+            var restaurant_circle_attrs = restaurant_circles
+                .attr("cx", function (d) { return d.x; })
+                .attr("cy", function (d) { return d.y; })
+                .attr("r", 4)
+                .style("fill", "#333333")
+                .style("opacity", 0.01)
+                .classed("restaurants", true);
+        });
+
+        function updateFilter(){
+
+            svg.selectAll(".restaurants")
+             .filter(function(d) {
+               var lower = curr_inspection_score - 15;
+
+               return (d.x > curr_inspection_score || d.x < lower);
+
+             })
+               .style("opacity", .01)
+
+             svg.selectAll(".restaurants")
+              .filter(function(d) {
+                var lower = curr_inspection_score - 15;
+                return (d.x > lower && d.x < curr_inspection_score);
+              })
+                .style("opacity", 1)
+        }
+
+        function dragstarted(d) {
+            d3.select(this).raise().classed("active", true);
+            var point = d3.mouse(this) , p = {x: point[0], y: point[1] };
+        }
+
+        function dragged(d) {
+            d3.select(this).select(".user_points")
+                .attr("cx", d.x = d3.event.x)
+                .attr("cy", d.y = d3.event.y);
+            d3.select(this).select(".user_points_radii")
+                .attr("cx", d.x = d3.event.x)
+                .attr("cy", d.y = d3.event.y);
+
+            updateFilter();
+        }
+
+        function dragended(d) {
+            d3.select(this).classed("active", false);
+        }
+
+        var pxToMiles = (pixels) => {
+          return ((pxToMileRatio/mapHeight)*pixels).toFixed(1);
+        }
+
+        var main_slider = document.getElementById("main_slider");
+
+        var curr_inspection_score = 50;
+        main_slider.oninput = function() {
+            curr_inspection_score = this.value;
+            main_slider = this.value;
+            document.getElementById("inspection-slider-value").innerHTML = this.value;
+            updateFilter();
+        }
+
+    </script>
+
+
+  </body>
+</html>

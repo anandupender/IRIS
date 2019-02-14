@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Solar ABM Demo 1</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+    <div style="width:40%; text-align:center">
+      <h1> Effects of Hardware Cost versus Panel Efficiency in Solar Panel Adoption Rates </h1>
+      <p>an interactive, in-progress research paper</p>
+    </div>
+
+    <div class="demo-container">
+
+      <div class="slider-container-outside">
+        <h3 id="price-display" class="display">100%</h3>
+        <div class="slider-container">
+          <input id="price-slider" orient="vertical" type="range" step="0.01" value="1" min="0.8" max="1.2">
+          <h3>Price</h3>
+        </div>
+      </div>
+
+      <div class="people-container-labels">
+        <div id="sensitivity-display-container">
+          <h3 id="sensitivity-display" style="text-decoration:underline;">Sensitivity: </h3>
+        </div>
+        <div class="people-container">
+          <img src="person.png" id="person-image"/>
+        </div>
+        <div class="labels">
+          <h4>Less Likely to Purchase</h4>
+          <h4>More Likely to Purchase</h4>
+        </div>
+      </div>
+
+      <div class="slider-container-outside">
+        <div class="slider-container">
+          <input id="efficiency-slider" orient="vertical" type="range" step="0.01" value="1" min="0.8" max="1.2">
+          <h3>Efficiency</h3>
+        </div>
+        <h3 id="efficiency-display" class="display">100%</h3>
+      </div>
+
+    </div>
+
+    <div class="explanation">
+      <h2>So what does it mean?</h2>
+      <p>As you will learn by experimenting with the interface, hardware cost seems to play a larger role in the adoption of solar technologies for homeowners
+      than the efficiency stats of the panels. Therefore, manufacturers should aim to create more inexpensive systems in order to cater to this behavior. Furthermore, installers
+      should encourage lower cost systems more than highly efficient systems in increasing adoption. </p>
+    </div>
+
+
+    <img class="iris-logo" src="iris.png"/>
+
+    <button class="paper-link">See Full Paper</button>
+
+    <script type="text/javascript">
+      var rangeSlider = document.getElementById("price-slider");
+      var efficiencySlider = document.getElementById("efficiency-slider");
+      var person = document.getElementById("person-image");
+      var sensitivity = document.getElementById("sensitivity-display");
+
+      rangeSlider.oninput = function() {
+        var priceDisplay = document.getElementById("price-display");
+        priceDisplay.innerHTML = Math.floor(this.value*100)+"%";
+        runAndMove();
+      }
+
+      efficiencySlider.oninput = function() {
+        var efficiencyDisplay = document.getElementById("efficiency-display");
+        efficiencyDisplay.innerHTML = Math.floor(this.value*100)+"%";
+        runAndMove();
+      }
+
+      function runAndMove(){
+        var algo = (.7*rangeSlider.value + .3*efficiencySlider.value)/(1.2); // ranges from .667 to 1
+        console.log(algo);
+
+        var mapped = (700/.333333)*(algo-.66666);
+
+        person.style.left = mapped+"px";
+
+        sensitivity.innerHTML = "Sensitivity: " + Math.round(algo * 100) / 100;
+      }
+
+    </script>
+
+  </body>
+</html>

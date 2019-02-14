@@ -1,0 +1,97 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+input{
+  flex:2;
+  -webkit-appearance: none;
+  height: 250px;
+  outline: none;
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+}
+
+.slider-container-outside{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.slider-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-container{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 40px;
+  border: 2px solid black;
+  padding:25px;
+  padding-top:60px;
+  padding-bottom:60px;
+}
+
+.people-container{
+  flex:6;
+  width: 800px;
+  border-bottom: 2px solid black;
+}
+
+.labels{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#person-image{
+  height:180px;
+  position: relative;
+  left:370px;
+}
+
+.display{
+  border:2px solid black;
+  padding:10px;
+}
+
+#sensitivity-display-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.explanation{
+  width:60%;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+.iris-logo{
+  position: fixed;
+  right:17px;
+  bottom: 17px;
+  width:100px;
+}
+
+.paper-link{
+  font-size: 12px;
+  position: fixed;
+  left:17px;
+  bottom: 17px;
+  border:2px black solid;
+  padding: 6px 10px;
+}
+
+.paper-link:hover{
+  border:2px solid blue;
+  color:blue;
+}

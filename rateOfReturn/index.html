@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Solar ABM Demo 2</title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+    <div style="width:40%; text-align:center">
+      <h1 id="title"> Lux Pro </h1>
+      <p>a sales tool for the smarter solar installer</p>
+    </div>
+
+    <div class="demo-container">
+
+      <div class="standard-container">
+        <h3>Customer Income Bracket</h3>
+        <select id="income">
+          <option value="0">$10k - $30k</option>
+          <option value="1">$30k - $60k</option>
+          <option value="2">$60k - $100k</option>
+          <option value="3">$100k - $200k</option>
+          <option value="4">$200k+</option>
+        </select>
+      </div>
+
+      <div class="standard-container">
+        <h3>Expected Rate of Return</h3>
+        <input id="irr-slider" type="range" step="0.01" value="0" min="0.0" max="0.9">
+        <h4 id="irr-value"> 0.0</h4>
+      </div>
+
+      <div class="standard-container">
+        <h3>Likelihood of Adoption</h3>
+          <h2 style="color:green;" id="solution"> 0%</h2>
+      </div>
+
+    </div>
+
+    <div id="explanation-container">
+      <h2>How To</h2>
+      <ol>
+        <li>Choose the income bracket of your target audience</li>
+        <li>Change the expected rate of return of your proposed solar system</li>
+        <li>Observe the changes in likelihood of purchases/adoption</li>
+        <li>Go back and change the income bracket to see how it effects the adoption at different return rates</li>
+      </ol>
+    </div>
+
+    <img class="iris-logo" src="iris.png"/>
+
+    <button class="paper-link">See Full Paper</button>
+
+    <script type="text/javascript">
+      var select = document.getElementById('income');
+      var slider = document.getElementById('irr-slider');
+      var sliderValue = document.getElementById('irr-value');
+      var solution = document.getElementById('solution');
+
+      select.oninput = function() {
+        run();
+      }
+
+      slider.oninput = function() {
+        sliderValue.innerHTML = this.value;
+        run();
+      }
+
+      function sigmoid(t) {
+        return 1/(1+Math.pow(Math.E, -t));
+      }
+
+      function run(){
+        var offsets = [5,4.5,4,3.5,3]; //from least income to most
+        var y_value = sigmoid(slider.value*10 - offsets[select.value]);
+        solution.innerHTML = Math.round(y_value * 100) + "%";
+      }
+
+
+    </script>
+
+  </body>
+</html>

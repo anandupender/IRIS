@@ -1,0 +1,134 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.input-vertical{
+  flex:2;
+  -webkit-appearance: none;
+  height: 250px;
+  width:50px;
+  outline: none;
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  transform: rotate(180deg);
+}
+
+.input-horizontal{
+  width: 250px;
+  height: 50px;
+}
+
+.slider-container-outside-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  margin-right:15px;
+  margin-bottom: 75px;
+}
+
+.slider-container-outside-bottom{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.slider-container h3{
+  margin:0px;
+}
+
+.demo-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+  border: 2px solid black;
+  padding:30px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.people-container{
+  display: flex;
+  align-items: flex-end;
+  width: 600px;
+  height:300px;
+  background-image: url("background.png");
+  background-repeat:no-repeat;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  /* border-bottom: 2px solid black; */
+}
+
+.labels{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#person-image{
+  height:150px;
+  margin-bottom:53px;
+  margin-left: 5px;
+  position: relative;
+}
+
+.display{
+  border:1px solid black;
+  width:30px;
+  padding:6px;
+  font-size: 12px;
+}
+
+#sensitivity-display-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.explanation{
+  width:60%;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  opacity: .4;
+  transition: .4s ease;
+}
+
+.explanation:hover{
+  opacity:1;
+  cursor: help;
+}
+
+.iris-logo{
+  position: fixed;
+  right:17px;
+  bottom: 17px;
+  width:100px;
+}
+
+.paper-link{
+  font-size: 12px;
+  position: fixed;
+  left:17px;
+  bottom: 17px;
+  border:2px black solid;
+  padding: 6px 10px;
+}
+
+.paper-link:hover{
+  border:2px solid blue;
+  color:blue;
+}

@@ -1,0 +1,14 @@
+#main-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:100px;
+  margin-bottom:200px;
+}
+
+.section{
+  display:none;
+  width:80%;
+  margin-top:60px;
+}
