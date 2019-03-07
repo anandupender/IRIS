@@ -5,6 +5,6 @@ baseName = "index"
 mediaType = "text/html"
 isHTML = true
 
-baseURL = "http://example.org/"
+baseURL = "https://anandupender.github.io/IRIS/paperSlides"
 languageCode = "en-us"
 title = "Paper to Slides"
